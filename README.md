@@ -7,3 +7,4 @@ delegacall can't work in hardhat network
 hh test test/ethernaut/delegation.test.js --network ganache
 
 hh test test/ethernaut/force.test.js
+hh test test/ethernaut/vault.test.js

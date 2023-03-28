@@ -40,7 +40,8 @@ if (!developmentChains.includes(network.name)) {
                 expect(await Fallback.owner()).to.equal(user1.address)
 
                 // balance change
-                expect(await tx2bal(user1, Fallback, "withdraw")).to.equal(
+                let tx = () => Fallback.connect(user1).withdraw()
+                expect(await tx2bal(user1.address, tx)).to.equal(
                     parseEther((10 + 0.0001).toString()).add(1)
                 )
 

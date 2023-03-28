@@ -19,12 +19,17 @@ const setNextBlockNumber = async () => {
     await network.provider.send("evm_mine")
 }
 
-const tx2bal = async (user, contractName, methodName) => {
-    let balance = await getBalance(user.address)
-    let tx = await contractName.connect(user)[methodName]()
+const tx2bal = async (addr, txf, gas = true) => {
+    let balance = await getBalance(addr)
+    let tx = await txf()
     const receipt = await tx.wait()
-    const gasFee = receipt.cumulativeGasUsed.mul(receipt.effectiveGasPrice)
-    balance = (await getBalance(user.address)).sub(balance).add(gasFee)
+    if (gas) {
+        const gasFee = receipt.cumulativeGasUsed.mul(receipt.effectiveGasPrice)
+        balance = (await getBalance(addr)).sub(balance).add(gasFee)
+    } else {
+        balance = (await getBalance(addr)).sub(balance)
+    }
+
     return balance
 }
 

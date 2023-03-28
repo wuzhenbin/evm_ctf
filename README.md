@@ -9,3 +9,5 @@ hh test test/ethernaut/delegation.test.js --network ganache
 hh test test/ethernaut/force.test.js
 hh test test/ethernaut/vault.test.js
 hh test test/ethernaut/king.test.js
+hh test test/ethernaut/reentrance.test.js
+hh test test/ethernaut/elevator.test.js

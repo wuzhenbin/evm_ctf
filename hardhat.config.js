@@ -37,6 +37,10 @@ module.exports = {
         },
     },
     networks: {
+        ganache: {
+            url: "http://127.0.0.1:7545",
+            chainId: 1337,
+        },
         hardhat: {
             chainId: 31337,
             // forking: {

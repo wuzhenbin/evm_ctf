@@ -1,4 +1,4 @@
-const developmentChains = ["hardhat", "localhost"]
+const developmentChains = ["hardhat", "localhost", "ganache"]
 const { ethers } = require("hardhat")
 
 const networkConfig = {

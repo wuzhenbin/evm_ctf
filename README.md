@@ -16,3 +16,6 @@ hh test test/ethernaut/gatekeepone.test.js
 hh test test/ethernaut/gatekeeptwo.test.js
 hh test test/ethernaut/naughtcoin.test.js
 hh test test/ethernaut/preservation.test.js
+hh test test/ethernaut/recover.test.js
+
+hh test test/localTest/test1.test.js --network local

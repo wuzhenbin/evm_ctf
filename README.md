@@ -13,3 +13,4 @@ hh test test/ethernaut/reentrance.test.js
 hh test test/ethernaut/elevator.test.js
 hh test test/ethernaut/privacy.test.js
 hh test test/ethernaut/gatekeepone.test.js
+hh test test/ethernaut/gatekeeptwo.test.js

@@ -13,7 +13,7 @@ const bytes32 = ethers.utils.formatBytes32String
 if (!developmentChains.includes(network.name)) {
     describe.skip
 } else {
-    describe("ethernaut_privacy Unit Tests", function () {
+    describe("ethernaut_gatekeepone Unit Tests", function () {
         let owner, user1, GatekeeperOne, GatekeeperOneAttack
         beforeEach(async () => {
             ;[owner, user1] = await ethers.getSigners()

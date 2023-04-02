@@ -22,5 +22,6 @@ hh test test/ethernaut/aliencodex.test.js
 hh test test/ethernaut/denial.test.js
 hh test test/ethernaut/shop.test.js
 hh test test/ethernaut/dex.test.js
+hh test test/ethernaut/dextwo.test.js
 
 hh test test/localTest/test1.test.js --network local

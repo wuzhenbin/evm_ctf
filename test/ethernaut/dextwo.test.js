@@ -14,13 +14,13 @@ if (!developmentChains.includes(network.name)) {
     describe.skip
 } else {
     describe("ethernaut_dex Unit Tests", function () {
-        let owner, Dex, Token1, Token2
+        let owner, Dex, Token1, Token2, Token3
         beforeEach(async () => {
             ;[owner] = await ethers.getSigners()
             const SwappableTokenContract = await ethers.getContractFactory(
                 "SwappableToken"
             )
-            const DexContract = await ethers.getContractFactory("Dex")
+            const DexContract = await ethers.getContractFactory("DexTwo")
             Dex = await DexContract.deploy()
 
             Token1 = await SwappableTokenContract.deploy(
@@ -35,14 +35,23 @@ if (!developmentChains.includes(network.name)) {
                 "token2",
                 110
             )
+            Token3 = await SwappableTokenContract.deploy(
+                Dex.address,
+                "token3",
+                "token3",
+                400
+            )
 
             await Dex.setTokens(Token1.address, Token2.address)
 
             // send token to dex
             await Token1.token_approve(owner.address, Dex.address, 100)
             await Token2.token_approve(owner.address, Dex.address, 100)
+            await Token3.token_approve(owner.address, Dex.address, 100)
+
             await Dex.addLiquidity(Token1.address, 100)
             await Dex.addLiquidity(Token2.address, 100)
+            await Dex.addLiquidity(Token3.address, 100)
         })
 
         describe("break it", () => {
@@ -57,6 +66,10 @@ if (!developmentChains.includes(network.name)) {
                         Token2.address,
                         Dex.address
                     )
+                    let dex_token3 = await Dex.balanceOf(
+                        Token3.address,
+                        Dex.address
+                    )
                     let user_token1 = await Dex.balanceOf(
                         Token1.address,
                         owner.address
@@ -65,40 +78,31 @@ if (!developmentChains.includes(network.name)) {
                         Token2.address,
                         owner.address
                     )
+                    let user_token3 = await Dex.balanceOf(
+                        Token3.address,
+                        owner.address
+                    )
                     console.log(
-                        `dex: ${dex_token1} ${dex_token2}, user: ${user_token1} ${user_token2}`
+                        `dex: ${dex_token1} ${dex_token2} ${dex_token3}, user: ${user_token1} ${user_token2} ${user_token3}`
                     )
                     console.log(`===========================`)
                 }
 
                 await showBalance()
 
-                await Dex.approve(Dex.address, 10)
-                await Dex.swap(Token1.address, Token2.address, 10)
+                await Token3.token_approve(owner.address, Dex.address, 100)
+                await Dex.swap(Token3.address, Token1.address, 100)
                 await showBalance()
 
-                await Dex.approve(Dex.address, 20)
-                await Dex.swap(Token2.address, Token1.address, 20)
-                await showBalance()
-
-                await Dex.approve(Dex.address, 24)
-                await Dex.swap(Token1.address, Token2.address, 24)
-                await showBalance()
-
-                await Dex.approve(Dex.address, 30)
-                await Dex.swap(Token2.address, Token1.address, 30)
-                await showBalance()
-
-                await Dex.approve(Dex.address, 41)
-                await Dex.swap(Token1.address, Token2.address, 41)
-                await showBalance()
-
-                await Dex.approve(Dex.address, 45)
-                await Dex.swap(Token2.address, Token1.address, 45)
+                await Token3.token_approve(owner.address, Dex.address, 200)
+                await Dex.swap(Token3.address, Token2.address, 200)
                 await showBalance()
 
                 expect(
                     await Dex.balanceOf(Token1.address, Dex.address)
+                ).to.equal(0)
+                expect(
+                    await Dex.balanceOf(Token2.address, Dex.address)
                 ).to.equal(0)
             })
         })

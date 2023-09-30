@@ -7533,6 +7533,11 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+"openzeppelin-contracts-08@npm:@openzeppelin/contracts@4.7.3":
+  version "4.7.3"
+  resolved "https://registry.npmmirror.com/@openzeppelin/contracts/-/contracts-4.7.3.tgz#939534757a81f8d69cc854c7692805684ff3111e"
+  integrity sha512-dGRS0agJzu8ybo44pCIf3xBaPQN/65AIXNgK8+4gzKd5kbvlqyxryUYVLJv7fK98Seyd2hDZzVEHSWAh0Bt1Yw==
+
 optionator@^0.8.1, optionator@^0.8.2:
   version "0.8.3"
   resolved "https://registry.npmmirror.com/optionator/-/optionator-0.8.3.tgz#84fa1d036fe9d3c7e21d99884b601167ec8fb495"
